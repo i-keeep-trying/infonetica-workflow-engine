@@ -27,3 +27,26 @@ This is a minimal backend service written in **.NET 8 / C#** that allows clients
 
 ```bash
 dotnet run
+```
+Then access it at http://localhost:{port}
+Example: http://localhost:5077
+
+## 🧪 API Endpoints
+
+### 1. POST /workflow-definitions
+Create a new workflow:
+```bash
+{
+  "name": "Document Approval",
+  "states": [
+    { "id": "draft", "name": "Draft", "isInitial": true, "isFinal": false, "enabled": true },
+    { "id": "review", "name": "Review", "isInitial": false, "isFinal": false, "enabled": true },
+    { "id": "approved", "name": "Approved", "isInitial": false, "isFinal": true, "enabled": true }
+  ],
+  "actions": [
+    { "id": "submit", "name": "Submit", "enabled": true, "fromStates": ["draft"], "toState": "review" },
+    { "id": "approve", "name": "Approve", "enabled": true, "fromStates": ["review"], "toState": "approved" }
+  ],
+  "description": "A simple approval process"
+}
+```
